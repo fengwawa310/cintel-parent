@@ -1,16 +1,16 @@
-package cn.com.cintel.service.base.impl;
+package cn.com.cintel.impl.base;
 
 import cn.com.cintel.mapper.BUserMapper;
 import cn.com.cintel.pojo.BUser;
 import cn.com.cintel.pojo.BUserExample;
 import cn.com.cintel.service.base.BUserService;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("userService")
+@Service
 @Transactional
 public class BUserServiceImpl implements BUserService {
 
