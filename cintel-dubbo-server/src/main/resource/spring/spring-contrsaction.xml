@@ -9,7 +9,7 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
     <!-- 扫描service包下所有使用注解的类型 -->
-    <context:component-scan base-package="cn.com.cintel.service.base.impl"/>
+    <context:component-scan base-package="cn.com.cintel.service"/>
 
     <!-- 事务配置 -->
     <!-- 事务管理器 -->
@@ -36,7 +36,9 @@
     <!-- 切面 -->
     <aop:config>
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* cn.com.cintel.service.*.impl.*.*(..))" />
+                     pointcut="execution(* cn.com.cintel.impl.*.*.*(..))" />
+        <!--<aop:advisor advice-ref="txAdvice"-->
+                     <!--pointcut="execution(* cn.com.cintel.service.*.impl.*.*(..))" />-->
         <!--pointcut="execution(* com.service.*.*.*.*(..))" />-->
     </aop:config>
 </beans>
