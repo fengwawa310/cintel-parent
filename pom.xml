@@ -31,6 +31,7 @@
         <org.slf4j-version>1.7.12</org.slf4j-version>
         <log4j-core.version>2.11.0</log4j-core.version>
         <mongodb.version>1.10.7.RELEASE</mongodb.version>
+        <spring-data-redis.version>2.0.7.RELEASE</spring-data-redis.version>
     </properties>
 
     <dependencyManagement>
@@ -146,6 +147,12 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-mongodb</artifactId>
                 <version>${mongodb.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring-data-redis.version}</version>
             </dependency>
 
         </dependencies>

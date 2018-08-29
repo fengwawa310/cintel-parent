@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- redis数据源 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <!-- redis连接池 -->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool"
+          destroy-method="destroy"  depends-on="poolConfig">
+        <constructor-arg name="poolConfig" ref="poolConfig" /> <!-- 加载jedisPool配置信息 -->
+        <constructor-arg name="host" value="${redis.host}" /><!-- redis主机地址 -->
+        <constructor-arg name="port" value="${redis.port}"/> <!-- redis连接端口 -->
+        <!-- <constructor-arg name="password" value="${redis.pass}"/> 密码 -->
+        <!--<constructor-arg name="database" value="${redis.database}"/> 数据库 -->
+        <constructor-arg name="timeout" value="${redis.timeout}"/> <!--连接超时-->
+    </bean>
+
+
+    <!--以下是redis的集群配置-->
+    <!--&lt;!&ndash;配置RedisClusterConfiguration&ndash;&gt;-->
+    <!--<bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">-->
+        <!--<property name="maxRedirects" value="5"></property>-->
+        <!--<property name="clusterNodes">-->
+            <!--<set>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7000"/>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7001"/>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7002"/>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7003"/>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7004"/>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+                    <!--<constructor-arg name="host" value="192.168.200.128"/>-->
+                    <!--<constructor-arg name="port" value="7005"/>-->
+                <!--</bean>-->
+            <!--</set>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;配置JedisConnectionFactory&ndash;&gt;-->
+    <!--<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+        <!--<constructor-arg name="poolConfig" ref="poolConfig"/>-->
+        <!--<constructor-arg name="clusterConfig" ref="redisClusterConfiguration"/>-->
+        <!--<property name="usePool" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">-->
+        <!--<property name="connectionFactory"   ref="jedisConnectionFactory" />-->
+        <!--<property name="keySerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+        <!--</property>-->
+        <!--<property name="valueSerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />-->
+        <!--</property>-->
+        <!--<property name="hashKeySerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+        <!--</property>-->
+        <!--<property name="hashValueSerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
+</beans>

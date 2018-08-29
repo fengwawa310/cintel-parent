@@ -71,6 +71,11 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+        <!-- redis集群 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
         <!-- Apache工具组件 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
