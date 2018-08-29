@@ -5,6 +5,7 @@ import cn.com.cintel.pojo.BUser;
 import cn.com.cintel.pojo.BUserExample;
 import cn.com.cintel.service.base.BUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class WelcomeController {
         return "list";
     }
 
-    @RequestMapping(value = "/testRedis")
+    @RequestMapping(value = "/testRedis",produces= MediaType.TEXT_PLAIN_VALUE+";charset=utf-8")
     public void testRedis(){
         basicRedisImp.saveString("haha","haha");
         System.out.println(basicRedisImp.getJedis().get("haha"));
